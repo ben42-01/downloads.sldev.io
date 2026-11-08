@@ -50,6 +50,27 @@ sldev-io runs your agents; it doesn't ship them. Install at least one agent CLI 
 `claude`, `codex` or `opencode`) and sign in to it. On first launch, sldev-io checks for git,
 the GitHub CLI, Node, Docker and SSH and shows how to install anything that's missing.
 
+## Skills for your agents
+
+`skills/` holds the sldev skills: plain `SKILL.md` folders that let any coding agent (Claude Code, Codex,
+OpenCode, Copilot, Cursor, Gemini CLI…) draft work for sldev-io while you plan with it in the terminal.
+
+| Skill | What the agent writes | Where it shows up in sldev-io |
+|---|---|---|
+| `sldev-mission` | a mission: brief, acceptance criteria, kind, agent | Missions → Saved for later |
+| `sldev-stories` | board stories with acceptance criteria and their order | Board → Proposed |
+| `sldev-recipe` | a Software Factory recipe | Factory → Recipes |
+| `sldev-eval` | an eval that compares agents on your code | Mission Control → Evals |
+
+Install them in a project with
+
+```bash
+npx skills add ben42-01/downloads.sldev.io
+```
+
+or from the app (Skills → Add to this project), which also keeps them up to date. Agents only ever write
+drafts: nothing starts until you launch it or approve it in sldev-io.
+
 ## Feedback
 
 Found a bug or have an idea? [Open an issue](https://github.com/ben42-01/downloads.sldev.io/issues)
@@ -57,4 +78,4 @@ and include your OS, the sldev-io version (status bar) and the agent you were us
 
 ---
 
-This repository holds release downloads only. The app's source code is private.
+This repository holds release downloads and the sldev skills. The app's source code is private.
