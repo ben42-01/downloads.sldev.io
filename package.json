@@ -1,0 +1,18 @@
+{
+  "name": "sldev",
+  "version": "0.3.0",
+  "description": "Run coding agents (Claude Code, Codex, Cursor, Copilot, OpenCode, Gemini) side by side in your terminal, with rules sync, project memory, usage and failover.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": { "sldev": "dist/sldev.mjs" },
+  "files": ["dist", "SKILL.md", "README.md", "LICENSE"],
+  "engines": { "node": ">=22.5" },
+  "os": ["linux", "darwin", "win32"],
+  "homepage": "https://github.com/ben42-01/sldev-io/tree/master/cli",
+  "repository": { "type": "git", "url": "git+https://github.com/ben42-01/sldev-io.git", "directory": "cli" },
+  "dependencies": {
+    "@xterm/headless": "6.0.0",
+    "node-pty": "1.1.0",
+    "yaml": "2.9.1"
+  }
+}
