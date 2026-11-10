@@ -2,7 +2,7 @@
 name: sldev-stories
 description: "Write user stories for sldev-io's work board: well-defined cards with acceptance criteria and dependencies, filed into the Proposed column for a person to approve. Use when asked to break a feature or epic into stories, tickets or tasks, or to plan work for the board."
 metadata:
-  sldev-skill: "1"
+  sldev-skill: "2"
 ---
 
 # Write stories for the sldev board
@@ -52,6 +52,16 @@ Keep it to what was asked: at most about 12 stories, and no "nice to have" work 
 
 `by` is your own agent id (claude, codex, cursor, copilot, opencode or gemini). The app adds the stories to Proposed (now if it is open, otherwise when it next opens) and removes the file.
 
-## 4. Finish
+## 4. Check the file
+
+The app reads the file once, and sets aside one it can't read: the user never sees it. So before you say it's done, check it the way sldev-io reads it:
+
+- With the sldev tools: call `sldev_check` with the file's path.
+- Otherwise, if the `sldev` command is installed: run `sldev skills check <file>`.
+- Otherwise read the file back yourself: it must be valid JSON: double quotes, no trailing commas, quotes and newlines inside strings written as `\"` and `\n`, and every story has a "title". Stories filed with `sldev_board_add` need no check.
+
+Fix what the check reports and check again. Say it's done only once it passes; if you couldn't check it, say that.
+
+## 5. Finish
 
 Say in one line how many stories you wrote and that they wait in Proposed on the board.

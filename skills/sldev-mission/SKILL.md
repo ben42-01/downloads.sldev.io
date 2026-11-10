@@ -2,7 +2,7 @@
 name: sldev-mission
 description: "Draft a mission for sldev-io: a brief, acceptance criteria, a kind and optionally an agent, saved as a draft the user launches from the app. Use when asked to write up, plan or queue a task for an agent, \"make this a mission\", or prepare work for later. It never starts the work."
 metadata:
-  sldev-skill: "1"
+  sldev-skill: "2"
 ---
 
 # Draft an sldev mission
@@ -33,7 +33,7 @@ Add retries to `uploadFile` in src/api/upload.ts: up to 3 attempts for 5xx respo
 waiting 1 s, 2 s and 4 s. Keep the function's signature. Don't add a dependency for this.
 ```
 
-- **title**: imperative, under 60 characters.
+- **title**: imperative, under 60 characters. In double quotes when it contains a colon.
 - **kind**: `build` (changes code; the default), `research` (answers a question, read-only), `investigate` (finds a bug's cause, no fix), `plan` (writes a plan, no code), `review` (reviews changes already made), `freeform` (the brief is sent exactly as written).
 - **criteria**: what a reviewer checks the change against. Each one observable and checkable; sldev's review shows which are met.
 - **agent**: only when the user asked for one: claude, codex, cursor, copilot, opencode or gemini. Leave it out for the user's default.
@@ -48,6 +48,16 @@ waiting 1 s, 2 s and 4 s. Keep the function's signature. Don't add a dependency 
 - How to check: the tests or commands to run.
 - One mission is one change someone can review in one sitting. Split bigger work into several files, or use the sldev-stories skill when the parts depend on each other.
 
-## 4. Finish
+## 4. Check it
+
+The app reads the file once, and sets aside one it can't read: the user never sees it. So before you say it's done, check it the way sldev-io reads it:
+
+- With the sldev tools: call `sldev_check` with the file's path.
+- Otherwise, if the `sldev` command is installed: run `sldev skills check <file>`.
+- Otherwise read the file back yourself: the part between the `---` lines is YAML: put any value that contains `: ` or ` #`, or starts with `[ { * & ! | > ' " % @` or a backtick, in double quotes (`title: "Fix: the parser"`), and the brief under it is not empty.
+
+Fix what the check reports and check again. Say it's done only once it passes; if you couldn't check it, say that.
+
+## 5. Finish
 
 Say in one line what you drafted and that it is in sldev-io under Missions, ready to launch. The app reads the file (now if it is open, otherwise when it next opens) and removes it from the drafts folder.

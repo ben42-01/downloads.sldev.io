@@ -2,7 +2,7 @@
 name: sldev-recipe
 description: "Write a Software Factory recipe for sldev-io: a YAML pipeline of agent, command and pull-request stages that the user runs from the app's Factory. Use when asked for a workflow, pipeline or process an agent team should follow (spec → build → test → review → PR), or to automate a repeated way of working."
 metadata:
-  sldev-skill: "1"
+  sldev-skill: "2"
 ---
 
 # Write an sldev factory recipe
@@ -59,6 +59,16 @@ Placeholders in prompts and the PR: `{intent}` (what the user typed when startin
 - Gate the steps a person should see (the spec, the review); not every stage.
 - Use the project's own scripts, read from package.json, the Makefile or whatever the project uses.
 
+## Check it
+
+The app reads the file once, and sets aside one it can't read: the user never sees it. So before you say it's done, check it the way sldev-io reads it:
+
+- With the sldev tools: call `sldev_check` with the file's path.
+- Otherwise, if the `sldev` command is installed: run `sldev skills check <file>`.
+- Otherwise read the file back yourself: it is YAML, so put any value that contains `: ` or ` #`, or starts with `[ { * & ! | > ' " % @` or a backtick, in double quotes (`title: "Fix: the parser"`); each stage is exactly one kind, and every `needs`/`retry` names a stage above it.
+
+Fix what the check reports and check again. Say it's done only once it passes; if you couldn't check it, say that.
+
 ## Finish
 
-Read the file back and check each stage is exactly one kind and every `needs`/`retry` names a stage above it. Then say in one line that the recipe is in sldev-io under Factory → Recipes. If it doesn't load, the library shows why under the file.
+Say in one line that the recipe is in sldev-io under Factory → Recipes.

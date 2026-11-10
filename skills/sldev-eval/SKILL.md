@@ -2,7 +2,7 @@
 name: sldev-eval
 description: "Write an eval for sldev-io: a task with checks that tells which agent (or prompt) does best on this project, run from Mission Control → Evals. Use when asked to compare or benchmark agents, models or prompts on real work, or to turn a past bug or task into a repeatable test."
 metadata:
-  sldev-skill: "1"
+  sldev-skill: "2"
 ---
 
 # Write an sldev eval
@@ -39,6 +39,16 @@ checks:
 - At least one `run` check that can't pass by accident (a test of the behaviour, not just "it builds").
 - A `diff` limit catches agents that rewrite too much; a `judge` catches what commands can't (the right place, the right approach).
 
+## Check it
+
+The app reads the file once, and sets aside one it can't read: the user never sees it. So before you say it's done, check it the way sldev-io reads it:
+
+- With the sldev tools: call `sldev_check` with the file's path.
+- Otherwise, if the `sldev` command is installed: run `sldev skills check <file>`.
+- Otherwise read the file back yourself: it is YAML, so put any value that contains `: ` or ` #`, or starts with `[ { * & ! | > ' " % @` or a backtick, in double quotes (`title: "Fix: the parser"`); `name`, `brief` and at least one check are there.
+
+Fix what the check reports and check again. Say it's done only once it passes; if you couldn't check it, say that.
+
 ## Finish
 
-Say in one line that the eval is in sldev-io under Mission Control → Evals, ready to run on the agents the user picks. If it doesn't load, Evals shows why under the file.
+Say in one line that the eval is in sldev-io under Mission Control → Evals, ready to run on the agents the user picks.
